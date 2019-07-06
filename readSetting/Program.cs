@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -25,9 +26,14 @@ namespace readSetting
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddOptions();
-                    services.AddLogging();
-                    services.Configure<vaulesInSetting>(hostContext.Configuration.GetSection("mySettings"));
+                services.AddOptions();
+                services.AddLogging();
+                    services.AddDbContext<DatabaseContext>(options =>
+                    {
+                        var connStr = hostContext.Configuration.GetConnectionString("DefaultConnection");
+                        options.UseSqlServer(connStr);
+                });
+                services.Configure<vaulesInSetting>(hostContext.Configuration.GetSection("mySettings"));
                     services.AddHostedService<TimerHostedService>();
                 });
             await builder.RunConsoleAsync();
