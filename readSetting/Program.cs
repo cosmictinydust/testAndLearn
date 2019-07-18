@@ -17,6 +17,7 @@ namespace readSetting
                 .ConfigureLogging((hostContext, config) =>
                 {
                     config.AddConsole();
+                    config.SetMinimumLevel(LogLevel.Warning);
                     //config.AddDebug();
                 })
                 .ConfigureAppConfiguration((hostContext, config) =>

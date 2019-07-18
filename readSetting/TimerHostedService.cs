@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -31,19 +32,19 @@ namespace readSetting
 
         private void DoWork(object state)
         {
-            var query = _databaseContext.OtherSet.AsQueryable();
+            var query = _databaseContext.OtherSet.AsQueryable().AsNoTracking();
             string newIp = "";
             OtherSet currentSet = (OtherSet)query.Where(x => x.itemName == "gzxf").FirstOrDefault();
             DateTime lastUpdate = currentSet.updateTime;
             TimeSpan minDiff = DateTime.Now - lastUpdate;
             if ((int)minDiff.TotalMinutes < 10)
                 newIp = currentSet.cItemSet;
-            _logger.LogInformation($"Program is running in {DateTime.Now}, the newIP:{newIp}");
+            _logger.LogWarning($"数据库最后更新时间:{lastUpdate}, the newIP:{newIp}");
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Timer is stopping!");
+            _logger.LogWarning("Timer is stopping!");
             _timer?.Change(Timeout.Infinite, 0);
             return Task.CompletedTask;
         }

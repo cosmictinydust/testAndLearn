@@ -9,12 +9,14 @@ namespace WriteToSpecifiedFile
         static void Main(string[] args)
         {
             GenerateFile();
-            Console.WriteLine("Press any key to run AppendCharsAfter5() !");
-            Console.ReadKey();
-            AppendCharsAfter5();
-            Console.WriteLine("ADD chars is completed, press any key to quit...");
+            //console.writeline("press any key to run appendcharsafter5() !");
+            //console.readkey();
+            //appendcharsafter5();
+            //console.writeline("add chars is completed, press any key to quit...");
             Console.ReadKey();
         }
+
+        static void WriteToSpecifyPo
 
         static void GenerateFile()
         {
@@ -43,5 +45,6 @@ namespace WriteToSpecifiedFile
                 fileStream.Write(data, 0, data.Length);
             }
         }
+
     }
 }
