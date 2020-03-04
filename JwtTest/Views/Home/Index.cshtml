@@ -1,0 +1,43 @@
+﻿<div class="row">
+    <ul class="list-inline">
+        <li><a href="#" onclick="GetToken();">取Token</a></li>
+        <li><a href="#" onclick="GetSecret();">取机密</a></li>
+    </ul>
+</div>
+<div class="row">
+    <div id="divShow" class="text-success text-break">
+
+    </div>
+</div>
+<input type="hidden" id="Token">
+
+<script type="text/javascript">
+    var GetToken;
+    var GetSecret;
+    $(document).ready(function () {
+        GetToken = function () {
+            $.ajax({
+                type: "GET", url: '@Url.Action("GetToken")',
+                success: function (data) {
+                    $("#divShow").html(data);
+                    $("#Token").val(data) ;
+                },
+                failure: function () {
+                    $("#divShow").html('取Token失败');
+                },
+            })
+        };
+        GetSecret = function () {
+            var tobeSent = $("#Token").val();
+            $.ajax({
+                type: "GET", url: '@Url.Action("GetSecret")'+"?str="+tobeSent,
+                success: function (data) {
+                    $("#divShow").html(data);
+                },
+                failure: function () {
+                    $("#divShow").html('取Token失败');
+                },
+            })
+        };
+    });
+</script>
