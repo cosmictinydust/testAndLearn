@@ -31,8 +31,24 @@ namespace JwtProtectedWIthApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> Get(string userName,string userPsw)
         {
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(userPsw))
+            {
+                throw new ArgumentNullException("用户名或密码不能为空");
+            }
+
+            var users = new Dictionary<string, string>() {
+                { "user1","password1"},
+                {"user2","password2" }
+            };
+
+            if (!users.ContainsKey(userName))
+                return null;
+            else
+                if (users[userName].ToString() != userPsw)
+                    return null;
+
             //创建声明数组 
             var claims = new Claim[]
             {
