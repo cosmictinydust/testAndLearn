@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfBackGroupWorkAndProgressTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfBackGroupWorkAndProgressTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="StartAsync" HorizontalAlignment="Left" Margin="250,115,0,0" VerticalAlignment="Top" Name="startAsyncButton" Click="StartAsyncButton_Click"/>
+        <Button Content="CancelAsync" HorizontalAlignment="Left" Margin="425,115,0,0" VerticalAlignment="Top" Name="CancelAsyncButton" Click="CancelAsyncButton_Click"/>
+        <Label Content="Ok" HorizontalAlignment="Left" Margin="350,200,0,0" VerticalAlignment="Top" Name="resultLabel"/>
+
+    </Grid>
+</Window>
